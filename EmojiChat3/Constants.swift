@@ -7,10 +7,11 @@
 //
 
 import Foundation
+import UIKit
 
 enum Constants {
-    enum tableView: String {
-        case cellID = "bubble"
+    enum Constraints: CGFloat {
+        case cellHeight = 150
     }
 }
 

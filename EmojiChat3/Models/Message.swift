@@ -7,8 +7,21 @@
 //
 
 import Foundation
+import FirebaseDatabase
 
 struct Message {
     var text: String?
     var isSender: Bool?
+    var toId: String?
+    var fromId: String?
+    var timestamp: String?
+
+    init?(snapshot: DataSnapshot) {
+        guard let data = snapshot.value as? [String: String] else { return nil}
+        self.text = data["text"]
+        self.toId = data["toId"]
+        self.fromId = data["fromId"]
+        self.timestamp = data["timestamp"]
+        self.isSender = true
+    }
 }

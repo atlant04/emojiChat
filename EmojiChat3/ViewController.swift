@@ -8,6 +8,7 @@
 
 import UIKit
 import FirebaseAuth
+import FirebaseDatabase
 
 class ViewController: UITableViewController {
 
@@ -24,7 +25,13 @@ class ViewController: UITableViewController {
         super.viewDidLoad()
         tableView.backgroundColor = .white
         tableView.separatorStyle = .none
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "chat")
+        tableView.register(ChatView.self, forCellReuseIdentifier: "chat")
+        let barBtn = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(newChatButtonTapped))
+        let logoutBtn = UIBarButtonItem(title: "Log out", style: .plain, target: self, action: #selector(logout))
+        navigationItem.rightBarButtonItem = barBtn
+        navigationItem.leftBarButtonItem = logoutBtn
+        navigationItem.title = "Chats"
+        navigationController?.navigationBar.prefersLargeTitles = true
     }
 }
 
@@ -34,13 +41,30 @@ extension ViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "chat", for: indexPath)
-        cell.textLabel?.text = people[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "chat", for: indexPath) as! ChatView
+//        cell.textLabel?.text = people[indexPath.row]
         return cell
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.navigationController?.pushViewController(ChatLogViewController(), animated: true)
+    }
+
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
+    }
+
+    @objc func newChatButtonTapped(sender: UIBarButtonItem) {
+        let usersVC = UsersTableViewController()
+        navigationController?.pushViewController(usersVC, animated: true)
+    }
+
+    @objc func logout(sender: UIBarButtonItem) {
+        if let _ = try? Auth.auth().signOut() {
+            let loginVC = LoginViewController()
+            loginVC.modalPresentationStyle = .fullScreen
+            self.present(loginVC, animated: true, completion: nil)
+        }
     }
 }
 

@@ -6,24 +6,12 @@
 //  Copyright © 2020 MT. All rights reserved.
 //
 import UIKit
+import FirebaseDatabase
+import FirebaseAuth
 
 class ChatLogViewController: UITableViewController {
-
-
-    var messages: [Message] = [
-        Message(text: "Hi my name is Maksim and I have been trying to build this fucking app for so long I had to restart twice", isSender: false),
-        Message(text: "Hey, Maksim, don't worry, dawg, you got it ", isSender: true),
-        Message(text: "Hi my name is Maksim and I have been trying to build this fucking app for so long I had to restart twice", isSender: false),
-        Message(text: "Hey, Maksim, don't worry, dawg, you got it ", isSender: true),
-        Message(text: "Hi my name is Maksim and I have been trying to build this fucking app for so long I had to restart twice", isSender: false),
-        Message(text: "Hey, Maksim, don't worry, dawg, you got it ", isSender: true),
-        Message(text: "Hi my name is Maksim and I have been trying to build this fucking app for so long I had to restart twice", isSender: false),
-        Message(text: "Hey, Maksim, don't worry, dawg, you got it ", isSender: true),
-        Message(text: "Hi my name is Maksim and I have been trying to build this fucking app for so long I had to restart twice", isSender: false),
-        Message(text: "Hey, Maksim, don't worry, dawg, you got it ", isSender: true),
-        Message(text: "Hi my name is Maksim and I have been trying to build this fucking app for so long I had to restart twice", isSender: false),
-        Message(text: "Hey, Maksim, don't worry, dawg, you got it ", isSender: true)
-    ]
+    var user: User?
+    var messages: [Message] = []
 
     var accessory = SendMessageView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 75))
 
@@ -47,6 +35,8 @@ class ChatLogViewController: UITableViewController {
         tableView.backgroundColor = UIColor(white: 0.95, alpha: 1)
         tableView.allowsSelection = false
         becomeFirstResponder()
+        accessory.sendButton.addTarget(self, action: #selector(handleSend), for: .touchUpInside)
+        observeMessages()
     }
 
 }
@@ -60,5 +50,27 @@ extension ChatLogViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "bubble", for: indexPath) as! Bubble
         cell.message = messages[indexPath.row]
         return cell
+    }
+
+    @objc func handleSend() {
+        guard let text = self.accessory.textField.text,
+            let senderId = Auth.auth().currentUser?.uid,
+            let user = self.user
+            else { return }
+
+        let ref = Database.database().reference().child("messages")
+        let childRef = ref.childByAutoId()
+        let timestamp = Date().description
+        let values = ["text": text, "toId": user.uid, "fromId": senderId, "timestamp": timestamp]
+        childRef.updateChildValues(values)
+    }
+
+    func observeMessages() {
+        Database.database().reference().child("messages").observe(.childAdded) { snap in
+            if let message = Message(snapshot: snap) {
+                self.messages.append(message)
+                self.tableView.reloadData()
+            }
+        }
     }
 }

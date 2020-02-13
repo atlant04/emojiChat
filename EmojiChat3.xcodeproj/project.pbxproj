@@ -16,6 +16,9 @@
 		FA4F5EE623F3A94000953EB2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA4F5EE523F3A93F00953EB2 /* GoogleService-Info.plist */; };
 		FA4F5EEA23F3B43000953EB2 /* EntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4F5EE923F3B43000953EB2 /* EntryView.swift */; };
 		FA4F5EEC23F3BCD700953EB2 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4F5EEB23F3BCD700953EB2 /* User.swift */; };
+		FA6535CC23F4E19900AC5C71 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6535CB23F4E19900AC5C71 /* ChatView.swift */; };
+		FA6535CE23F4F23800AC5C71 /* UsersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6535CD23F4F23800AC5C71 /* UsersTableViewController.swift */; };
+		FA6535D023F4F43300AC5C71 /* UserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6535CF23F4F43300AC5C71 /* UserView.swift */; };
 		FA9FC03023F25484008D7F1E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9FC02F23F25484008D7F1E /* AppDelegate.swift */; };
 		FA9FC03223F25484008D7F1E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9FC03123F25484008D7F1E /* SceneDelegate.swift */; };
 		FA9FC03423F25484008D7F1E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9FC03323F25484008D7F1E /* ViewController.swift */; };
@@ -37,6 +40,9 @@
 		FA4F5EE523F3A93F00953EB2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FA4F5EE923F3B43000953EB2 /* EntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryView.swift; sourceTree = "<group>"; };
 		FA4F5EEB23F3BCD700953EB2 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		FA6535CB23F4E19900AC5C71 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
+		FA6535CD23F4F23800AC5C71 /* UsersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersTableViewController.swift; sourceTree = "<group>"; };
+		FA6535CF23F4F43300AC5C71 /* UserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserView.swift; sourceTree = "<group>"; };
 		FA9FC02C23F25484008D7F1E /* EmojiChat3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EmojiChat3.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA9FC02F23F25484008D7F1E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FA9FC03123F25484008D7F1E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -100,6 +106,8 @@
 			children = (
 				FA4F5EE123F3984F00953EB2 /* Message.swift */,
 				FA4F5EEB23F3BCD700953EB2 /* User.swift */,
+				FA6535CB23F4E19900AC5C71 /* ChatView.swift */,
+				FA6535CF23F4F43300AC5C71 /* UserView.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -138,6 +146,7 @@
 				FA9FC04323F25588008D7F1E /* Constants.swift */,
 				FA4F5EE323F39E0A00953EB2 /* LoginViewController.swift */,
 				FA4F5EE523F3A93F00953EB2 /* GoogleService-Info.plist */,
+				FA6535CD23F4F23800AC5C71 /* UsersTableViewController.swift */,
 			);
 			path = EmojiChat3;
 			sourceTree = "<group>";
@@ -263,11 +272,14 @@
 				FA4F5EE223F3984F00953EB2 /* Message.swift in Sources */,
 				FA47758923F2685A007C65E2 /* Extensions.swift in Sources */,
 				FA9FC03223F25484008D7F1E /* SceneDelegate.swift in Sources */,
+				FA6535CC23F4E19900AC5C71 /* ChatView.swift in Sources */,
+				FA6535D023F4F43300AC5C71 /* UserView.swift in Sources */,
 				FA47758623F266F8007C65E2 /* Bubble.swift in Sources */,
 				FA47758423F26209007C65E2 /* SendMessageView.swift in Sources */,
 				FA4F5EEC23F3BCD700953EB2 /* User.swift in Sources */,
 				FA4F5EE423F39E0A00953EB2 /* LoginViewController.swift in Sources */,
 				FA9FC04423F25588008D7F1E /* Constants.swift in Sources */,
+				FA6535CE23F4F23800AC5C71 /* UsersTableViewController.swift in Sources */,
 				FA4F5EEA23F3B43000953EB2 /* EntryView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
