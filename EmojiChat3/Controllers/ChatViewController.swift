@@ -9,9 +9,14 @@ import UIKit
 import FirebaseDatabase
 import FirebaseAuth
 
-class ChatLogViewController: UITableViewController {
-    var user: User?
+class ChatViewController: UITableViewController {
+    var receiver: User?
     var messages: [Message] = []
+    var threadId: String? {
+        didSet {
+              observeMessages()
+        }
+    }
 
     var accessory = SendMessageView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 75))
 
@@ -36,12 +41,14 @@ class ChatLogViewController: UITableViewController {
         tableView.allowsSelection = false
         becomeFirstResponder()
         accessory.sendButton.addTarget(self, action: #selector(handleSend), for: .touchUpInside)
-        observeMessages()
+        if threadId == nil {
+            threadId = setupOneToOneChat()
+        }
     }
 
 }
 
-extension ChatLogViewController {
+extension ChatViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         messages.count
     }
@@ -51,26 +58,37 @@ extension ChatLogViewController {
         cell.message = messages[indexPath.row]
         return cell
     }
+}
+
+extension ChatViewController {
+    func setupOneToOneChat() -> String? {
+        guard let senderId = Auth.auth().currentUser?.uid, let receiverId = receiver?.uid else { return nil }
+        return (senderId < receiverId) ? senderId + receiverId : receiverId + senderId
+    }
 
     @objc func handleSend() {
         guard let text = self.accessory.textField.text,
             let senderId = Auth.auth().currentUser?.uid,
-            let user = self.user
-            else { return }
+            let receiverID = receiver?.uid,
+            let threadId = self.threadId
+        else { return }
 
-        let ref = Database.database().reference().child("messages")
-        let childRef = ref.childByAutoId()
+        let database = Database.database().reference()
+        let thread = database.child("threads").child(threadId).childByAutoId()
         let timestamp = Date().description
-        let values = ["text": text, "toId": user.uid, "fromId": senderId, "timestamp": timestamp]
-        childRef.updateChildValues(values)
+        let values = ["text": text, "toId": receiverID, "fromId": senderId, "timestamp": timestamp]
+        thread.updateChildValues(values)
     }
 
     func observeMessages() {
-        Database.database().reference().child("messages").observe(.childAdded) { snap in
+        guard let threadId = self.threadId else { return }
+        let ref = Database.database().reference().child("threads").child(threadId)
+        ref.observe(.childAdded) { snap in
             if let message = Message(snapshot: snap) {
                 self.messages.append(message)
                 self.tableView.reloadData()
             }
         }
     }
+
 }

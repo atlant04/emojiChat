@@ -16,8 +16,17 @@ class EntryView: UIView {
         addSubview(segmentedControl)
         addSubview(stackView)
         addSubview(button)
+        addSubview(profileView)
         setupConstraints()
     }
+
+    let profileView: UIImageView = {
+        let iv = UIImageView()
+        iv.translatesAutoresizingMaskIntoConstraints = false;
+        iv.image = UIImage(named: "emoji")
+        iv.isUserInteractionEnabled = true
+        return iv
+    }()
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -82,7 +91,11 @@ class EntryView: UIView {
 
     func setupConstraints() {
         NSLayoutConstraint.activate([
-            segmentedControl.topAnchor.constraint(equalTo: topAnchor),
+            profileView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            profileView.heightAnchor.constraint(equalToConstant: 100),
+            profileView.widthAnchor.constraint(equalToConstant: 100),
+            profileView.topAnchor.constraint(equalTo: topAnchor, constant: 50),
+            segmentedControl.topAnchor.constraint(equalTo: profileView.bottomAnchor, constant: 16),
             segmentedControl.leadingAnchor.constraint(equalTo: leadingAnchor),
             segmentedControl.trailingAnchor.constraint(equalTo: trailingAnchor),
             segmentedControl.bottomAnchor.constraint(equalTo: stackView.topAnchor, constant: -16),

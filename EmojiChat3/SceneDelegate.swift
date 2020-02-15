@@ -21,7 +21,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
         if let _ = Auth.auth().currentUser {
-            window.rootViewController = UINavigationController(rootViewController: ViewController())
+            window.rootViewController = UINavigationController(rootViewController: MainViewController())
         } else {
             window.rootViewController = LoginViewController()
         }

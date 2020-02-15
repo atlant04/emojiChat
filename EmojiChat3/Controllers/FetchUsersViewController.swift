@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import FirebaseDatabase
 
-class UsersTableViewController: UITableViewController {
+class FetchUsersViewController: UITableViewController {
 
     var users: [User] = []
 
@@ -27,15 +27,17 @@ class UsersTableViewController: UITableViewController {
     }
 }
 
-extension UsersTableViewController {
+extension FetchUsersViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         users.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "user", for: indexPath) as! UserView
-        cell.textLabel?.text = users[indexPath.row].name
-        cell.detailTextLabel?.text = users[indexPath.row].email
+        let user = users[indexPath.row]
+        cell.textLabel?.text = user.name
+        cell.detailTextLabel?.text = user.email
+        cell.profileImage.fetchCachedImage(for: user)
         return cell
     }
 
@@ -44,13 +46,9 @@ extension UsersTableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let chatVC = ChatLogViewController()
-        let root = ViewController()
-        let nav = UINavigationController(rootViewController: root)
-        chatVC.user = users[indexPath.row]
-        nav.viewControllers.append(chatVC)
-        nav.modalPresentationStyle = .fullScreen
-        self.present(nav, animated: true, completion: nil)
+        let chatVC = NewChatViewController()
+        chatVC.receiver = users[indexPath.row]
+        navigationController?.pushViewController(chatVC, animated: true)
     }
 
     func fetchUsers() {
