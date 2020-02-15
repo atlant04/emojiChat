@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		550FB18CA2EFDB21A471A79D /* Pods_EmojiChat3.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96EF0FDC84C2D6664DD58F7C /* Pods_EmojiChat3.framework */; };
+		FA14FAEA23F7BD7800934C71 /* Pods_EmojiChat3.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B289039DE8FC47C29FCE875 /* Pods_EmojiChat3.framework */; };
+		FA14FAEB23F7BD7800934C71 /* Pods_EmojiChat3.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0B289039DE8FC47C29FCE875 /* Pods_EmojiChat3.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FA2ABF2E23F88935005498A9 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2ABF2D23F88935005498A9 /* Database.swift */; };
+		FA2ABF3023F89D28005498A9 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2ABF2F23F89D28005498A9 /* Chat.swift */; };
 		FA47758423F26209007C65E2 /* SendMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA47758323F26209007C65E2 /* SendMessageView.swift */; };
 		FA47758623F266F8007C65E2 /* Bubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA47758523F266F8007C65E2 /* Bubble.swift */; };
 		FA47758923F2685A007C65E2 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA47758823F2685A007C65E2 /* Extensions.swift */; };
@@ -28,10 +31,26 @@
 		FA9FC04823F25A63008D7F1E /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9FC04723F25A63008D7F1E /* ChatViewController.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		FA14FAEC23F7BD7800934C71 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				FA14FAEB23F7BD7800934C71 /* Pods_EmojiChat3.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		5D503B0C490CB708500FC559 /* Pods-EmojiChat3.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EmojiChat3.debug.xcconfig"; path = "Target Support Files/Pods-EmojiChat3/Pods-EmojiChat3.debug.xcconfig"; sourceTree = "<group>"; };
-		96EF0FDC84C2D6664DD58F7C /* Pods_EmojiChat3.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EmojiChat3.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A5640323B39B5697B8CF4F5F /* Pods-EmojiChat3.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EmojiChat3.release.xcconfig"; path = "Target Support Files/Pods-EmojiChat3/Pods-EmojiChat3.release.xcconfig"; sourceTree = "<group>"; };
+		0B289039DE8FC47C29FCE875 /* Pods_EmojiChat3.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EmojiChat3.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		63921C40AC0E06AA2C0300AF /* Pods-EmojiChat3.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EmojiChat3.debug.xcconfig"; path = "Target Support Files/Pods-EmojiChat3/Pods-EmojiChat3.debug.xcconfig"; sourceTree = "<group>"; };
+		92DE406F2C0115273C0BB534 /* Pods-EmojiChat3.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EmojiChat3.release.xcconfig"; path = "Target Support Files/Pods-EmojiChat3/Pods-EmojiChat3.release.xcconfig"; sourceTree = "<group>"; };
+		FA2ABF2D23F88935005498A9 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
+		FA2ABF2F23F89D28005498A9 /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
 		FA47758323F26209007C65E2 /* SendMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMessageView.swift; sourceTree = "<group>"; };
 		FA47758523F266F8007C65E2 /* Bubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bubble.swift; sourceTree = "<group>"; };
 		FA47758823F2685A007C65E2 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -59,7 +78,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				550FB18CA2EFDB21A471A79D /* Pods_EmojiChat3.framework in Frameworks */,
+				FA14FAEA23F7BD7800934C71 /* Pods_EmojiChat3.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -69,18 +88,26 @@
 		375342DBCE00AFFF7A20E997 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				5D503B0C490CB708500FC559 /* Pods-EmojiChat3.debug.xcconfig */,
-				A5640323B39B5697B8CF4F5F /* Pods-EmojiChat3.release.xcconfig */,
+				63921C40AC0E06AA2C0300AF /* Pods-EmojiChat3.debug.xcconfig */,
+				92DE406F2C0115273C0BB534 /* Pods-EmojiChat3.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		F2350F782C9BD0DE7C4C270B /* Frameworks */ = {
+		95417DF12D6846859F439F14 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				96EF0FDC84C2D6664DD58F7C /* Pods_EmojiChat3.framework */,
+				0B289039DE8FC47C29FCE875 /* Pods_EmojiChat3.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FA2ABF2C23F88926005498A9 /* Supporting */ = {
+			isa = PBXGroup;
+			children = (
+				FA2ABF2D23F88935005498A9 /* Database.swift */,
+			);
+			path = Supporting;
 			sourceTree = "<group>";
 		};
 		FA33E79523F78B4D00AA4488 /* Controllers */ = {
@@ -119,6 +146,7 @@
 				FA4F5EEB23F3BCD700953EB2 /* User.swift */,
 				FA6535CB23F4E19900AC5C71 /* ChatView.swift */,
 				FA6535CF23F4F43300AC5C71 /* UserView.swift */,
+				FA2ABF2F23F89D28005498A9 /* Chat.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -129,7 +157,7 @@
 				FA9FC02E23F25484008D7F1E /* EmojiChat3 */,
 				FA9FC02D23F25484008D7F1E /* Products */,
 				375342DBCE00AFFF7A20E997 /* Pods */,
-				F2350F782C9BD0DE7C4C270B /* Frameworks */,
+				95417DF12D6846859F439F14 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -144,6 +172,7 @@
 		FA9FC02E23F25484008D7F1E /* EmojiChat3 */ = {
 			isa = PBXGroup;
 			children = (
+				FA2ABF2C23F88926005498A9 /* Supporting */,
 				FA33E79523F78B4D00AA4488 /* Controllers */,
 				FA4F5EE023F3984400953EB2 /* Models */,
 				FA47758723F26832007C65E2 /* Extensions */,
@@ -166,11 +195,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FA9FC04023F25489008D7F1E /* Build configuration list for PBXNativeTarget "EmojiChat3" */;
 			buildPhases = (
-				389F62D54E8D185E9E87ECB4 /* [CP] Check Pods Manifest.lock */,
+				F31A37FD2048F620C70D6978 /* [CP] Check Pods Manifest.lock */,
 				FA9FC02823F25484008D7F1E /* Sources */,
 				FA9FC02923F25484008D7F1E /* Frameworks */,
 				FA9FC02A23F25484008D7F1E /* Resources */,
-				A9E89DFE8C592ECAEB3A40DB /* [CP] Embed Pods Frameworks */,
+				89CC16C633E714F6BE80FEAC /* [CP] Embed Pods Frameworks */,
+				FA14FAEC23F7BD7800934C71 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -228,7 +258,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		389F62D54E8D185E9E87ECB4 /* [CP] Check Pods Manifest.lock */ = {
+		89CC16C633E714F6BE80FEAC /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-EmojiChat3/Pods-EmojiChat3-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-EmojiChat3/Pods-EmojiChat3-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-EmojiChat3/Pods-EmojiChat3-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F31A37FD2048F620C70D6978 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -250,23 +297,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		A9E89DFE8C592ECAEB3A40DB /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-EmojiChat3/Pods-EmojiChat3-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-EmojiChat3/Pods-EmojiChat3-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-EmojiChat3/Pods-EmojiChat3-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -285,9 +315,11 @@
 				FA47758623F266F8007C65E2 /* Bubble.swift in Sources */,
 				FA47758423F26209007C65E2 /* SendMessageView.swift in Sources */,
 				FA4F5EEC23F3BCD700953EB2 /* User.swift in Sources */,
+				FA2ABF3023F89D28005498A9 /* Chat.swift in Sources */,
 				FA4F5EE423F39E0A00953EB2 /* LoginViewController.swift in Sources */,
 				FA9FC04423F25588008D7F1E /* Constants.swift in Sources */,
 				FA6535CE23F4F23800AC5C71 /* FetchUsersViewController.swift in Sources */,
+				FA2ABF2E23F88935005498A9 /* Database.swift in Sources */,
 				FA4F5EEA23F3B43000953EB2 /* EntryView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -422,17 +454,18 @@
 		};
 		FA9FC04123F25489008D7F1E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5D503B0C490CB708500FC559 /* Pods-EmojiChat3.debug.xcconfig */;
+			baseConfigurationReference = 63921C40AC0E06AA2C0300AF /* Pods-EmojiChat3.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = E65C7W23SN;
+				DEVELOPMENT_TEAM = ZWTJU2A46F;
+				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
 				INFOPLIST_FILE = EmojiChat3/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.MT.EmojiChat3;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Tochilka.EmojiChat3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -441,17 +474,18 @@
 		};
 		FA9FC04223F25489008D7F1E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A5640323B39B5697B8CF4F5F /* Pods-EmojiChat3.release.xcconfig */;
+			baseConfigurationReference = 92DE406F2C0115273C0BB534 /* Pods-EmojiChat3.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = E65C7W23SN;
+				DEVELOPMENT_TEAM = ZWTJU2A46F;
+				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
 				INFOPLIST_FILE = EmojiChat3/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.MT.EmojiChat3;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Tochilka.EmojiChat3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

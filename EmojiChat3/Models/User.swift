@@ -8,8 +8,9 @@
 
 import Foundation
 import FirebaseDatabase
+import FirebaseAuth
 
-struct User {
+struct User: Codable {
     var uid: String?
     var email: String?
     var name: String?
@@ -25,5 +26,26 @@ struct User {
         uid = snapshot.key
         email = values["email"] as? String
         name = values["name"] as? String
+    }
+
+//    static func authUser() -> User? {
+//        guard let FIRUser = Auth.auth().currentUser else { return nil }
+//        let uid = FIRUser.uid
+//        let email = FIRUser.email
+//    }
+
+    static func save(_ user: User) {
+        UserDefaults.standard.set(try? PropertyListEncoder().encode(user), forKey: "currentUser")
+    }
+
+    static func get() -> User? {
+        let user: User?
+        if let data = UserDefaults.standard.object(forKey: "currentUser") as? Data {
+            user = try? PropertyListDecoder().decode(User.self, from: data)
+            return user
+        } else {
+            fatalError("could not retrieve user from user defaults")
+            return nil
+        }
     }
 }

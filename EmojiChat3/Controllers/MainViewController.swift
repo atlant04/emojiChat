@@ -12,9 +12,8 @@ import FirebaseDatabase
 
 class MainViewController: UITableViewController {
 
-    var users: [User] = []
-    var lastMessages: [String] = []
-    var threads: [String] = []
+    var currentUser: User!
+    var chats: [Chat] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,28 +26,32 @@ class MainViewController: UITableViewController {
         navigationItem.leftBarButtonItem = logoutBtn
         navigationItem.title = "Chats"
         navigationController?.navigationBar.prefersLargeTitles = true
-        observeThreads()
+        if (currentUser == nil) {
+             currentUser = User.get()
+        }
+        fetchChats()
     }
 }
 
 extension MainViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        users.count
+        chats.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "chat", for: indexPath) as! ChatView
-        let user = users[indexPath.row]
-        cell.nameLabel.text = user.name
+        let chat = chats[indexPath.row]
+        guard let name = chat.user?.name, let text = chat.messages.first?.text, let user = chat.user else { return cell }
+        cell.nameLabel.text = name
         cell.profileImage.fetchCachedImage(for: user)
-        cell.messageLabel.text = lastMessages[indexPath.row]
+        cell.messageLabel.text = text
         return cell
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let chatVC = ChatViewController()
-        chatVC.threadId = threads[indexPath.row]
-        chatVC.receiver = users[indexPath.row]
+        chatVC.threadId = chats[indexPath.row].thread
+        chatVC.receiver = chats[indexPath.row].user
         self.navigationController?.pushViewController(chatVC, animated: true)
     }
 
@@ -69,35 +72,61 @@ extension MainViewController {
         }
     }
 
-    func observeThreads() {
-        guard let uid = Auth.auth().currentUser?.uid else { return }
-        let database = Database.database().reference()
-        let ref = database.child("users").child(uid).child("chats")
-        ref.observe(.childAdded) { snap in
-            if let thread = snap.value as? String {
-                print(thread)
-                self.threads.append(thread)
-                let threadRef = database.child("threads").child(thread)
-                threadRef.observeSingleEvent(of: .childAdded) { snap in
-                    if let message = Message(snapshot: snap) {
-                        self.observeUser(for: message)
+    //    func observeThreads() {
+    //        guard let uid = Auth.auth().currentUser?.uid else { return }
+    //        let database = Database.database().reference()
+    //        let ref = database.child("users").child(uid).child("chats")
+    //        ref.observe(.childAdded) { snap in
+    //            if let thread = snap.value as? String {
+    //                self.threads.append(thread)
+    //                let threadRef = database.child("threads").child(thread)
+    //                threadRef.observeSingleEvent(of: .childAdded) { snap in
+    //                    if let message = Message(snapshot: snap) {
+    //                        self.observeUser(for: message)
+    //                    }
+    //                }
+    //            }
+    //        }
+    //    }
+
+    func fetchChats() {
+        DispatchQueue.global(qos: .background).async { [weak self] in
+            DB.observeThread(for: self!.currentUser) { thread, error in
+                guard let thread = thread else { return }
+                let chat = Chat()
+                chat.thread = thread
+                self?.fetchMessages(for: chat)
+                self?.chats.append(chat)
+            }
+        }
+    }
+
+    func fetchMessages(for chat: Chat) {
+        DB.observeMessage(for: chat.thread!) { [weak self] (message, eror) in
+            guard let message = message else { return }
+            chat.messages.append(message)
+            if (chat.messages.count == 1) {
+                guard let toId = message.toId else { return }
+                DB.observeUser(id: toId) { user, error in
+                    chat.user = user
+                    DispatchQueue.main.async {
+                        self?.tableView.reloadData()
                     }
                 }
             }
         }
     }
 
-    func observeUser(for message: Message) {
-        guard let toId = message.toId else { return }
-        lastMessages.append(message.text!)
-        let ref = Database.database().reference().child("users").child(toId)
-        ref.observeSingleEvent(of: .value) { snap in
-            if let user = User(snapshot: snap) {
-                self.users.append(user)
-                self.tableView.reloadData()
-            }
-        }
-    }
+    //    func observeUser(for message: Message, chat: inout Chat) {
+    //        guard let toId = message.toId else { return }
+    //        let ref = Database.database().reference().child("users").child(toId)
+    //        ref.observeSingleEvent(of: .value) { snap in
+    //            if let user = User(snapshot: snap) {
+    //                chat.user = user
+    //                self.tableView.reloadData()
+    //            }
+    //        }
+    //    }
 
 }
 

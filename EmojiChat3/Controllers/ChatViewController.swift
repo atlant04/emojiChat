@@ -12,6 +12,7 @@ import FirebaseAuth
 class ChatViewController: UITableViewController {
     var receiver: User?
     var messages: [Message] = []
+
     var threadId: String? {
         didSet {
               observeMessages()
@@ -74,7 +75,9 @@ extension ChatViewController {
         else { return }
 
         if messages.count == 0 {
-            let ref = Database.database().reference().child("users").child(senderId).child("chats").childByAutoId()
+            var ref = Database.database().reference().child("users").child(senderId).child("chats").childByAutoId()
+            ref.setValue(threadId)
+            ref = Database.database().reference().child("users").child(receiverID).child("chats").childByAutoId()
             ref.setValue(threadId)
         }
         let thread = Database.database().reference().child("threads").child(threadId)

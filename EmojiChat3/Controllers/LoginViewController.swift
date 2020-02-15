@@ -89,6 +89,8 @@ class LoginViewController: UIViewController {
 
     func presentViewController(with user: User) {
         let vc = MainViewController()
+        vc.currentUser = user
+        User.save(user)
         let navigationVC = UINavigationController(rootViewController: vc)
         navigationVC.modalPresentationStyle = .fullScreen
         self.present(navigationVC, animated: true)
