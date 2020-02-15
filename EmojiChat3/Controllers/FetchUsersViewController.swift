@@ -46,7 +46,7 @@ extension FetchUsersViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let chatVC = NewChatViewController()
+        let chatVC = ChatViewController()
         chatVC.receiver = users[indexPath.row]
         navigationController?.pushViewController(chatVC, animated: true)
     }

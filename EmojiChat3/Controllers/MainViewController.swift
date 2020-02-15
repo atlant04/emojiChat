@@ -74,14 +74,13 @@ extension MainViewController {
         let database = Database.database().reference()
         let ref = database.child("users").child(uid).child("chats")
         ref.observe(.childAdded) { snap in
-            if let dict = snap.value as? [String: Any] {
-                if let thread = dict["threadId"] as? String {
-                    self.threads.append(thread)
-                    let threadRef = database.child("threads").child(thread)
-                    threadRef.observeSingleEvent(of: .childAdded) { snap in
-                        if let message = Message(snapshot: snap) {
-                            self.observeUser(for: message)
-                        }
+            if let thread = snap.value as? String {
+                print(thread)
+                self.threads.append(thread)
+                let threadRef = database.child("threads").child(thread)
+                threadRef.observeSingleEvent(of: .childAdded) { snap in
+                    if let message = Message(snapshot: snap) {
+                        self.observeUser(for: message)
                     }
                 }
             }

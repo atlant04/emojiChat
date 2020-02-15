@@ -73,11 +73,15 @@ extension ChatViewController {
             let threadId = self.threadId
         else { return }
 
-        let database = Database.database().reference()
-        let thread = database.child("threads").child(threadId).childByAutoId()
+        if messages.count == 0 {
+            let ref = Database.database().reference().child("users").child(senderId).child("chats").childByAutoId()
+            ref.setValue(threadId)
+        }
+        let thread = Database.database().reference().child("threads").child(threadId)
+        let newMessage = thread.childByAutoId()
         let timestamp = Date().description
         let values = ["text": text, "toId": receiverID, "fromId": senderId, "timestamp": timestamp]
-        thread.updateChildValues(values)
+        newMessage.updateChildValues(values)
     }
 
     func observeMessages() {
