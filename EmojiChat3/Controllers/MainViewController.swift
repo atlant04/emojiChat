@@ -51,6 +51,13 @@ extension MainViewController {
         cell.nameLabel.text = name
         cell.profileImage.fetchCachedImage(for: user)
         cell.messageLabel.text = text
+
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MM/dd"
+        if let seconds = chat.messages.first?.timestamp {
+            let date = Date(timeIntervalSince1970: Double(seconds)!)
+            cell.dateLabel.text = formatter.string(from: date)
+        }
         return cell
     }
 
@@ -112,8 +119,9 @@ extension MainViewController {
             guard let message = message else { return }
             chat.messages.append(message)
             if (chat.messages.count == 1) {
-                guard let toId = message.toId else { return }
-                DB.observeUser(id: toId) { user, error in
+                guard let toId = message.toId, let fromId = message.fromId else { return }
+                let id = (toId == self?.currentUser.uid) ? fromId : toId
+                DB.observeUser(id: id) { user, error in
                     chat.user = user
                     DispatchQueue.main.async {
                         self?.tableView.reloadData()

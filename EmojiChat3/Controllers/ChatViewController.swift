@@ -45,6 +45,8 @@ class ChatViewController: UITableViewController {
         if threadId == nil {
             threadId = setupOneToOneChat()
         }
+        navigationController?.navigationBar.prefersLargeTitles = false
+        navigationItem.title = receiver?.name
     }
 
 }
@@ -56,7 +58,13 @@ extension ChatViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "bubble", for: indexPath) as! Bubble
-        cell.message = messages[indexPath.row]
+        let message = messages[indexPath.row]
+        cell.message = message
+        if message.fromId == Auth.auth().currentUser?.uid {
+            cell.isSender = true
+        } else {
+            cell.isSender = false
+        }
         return cell
     }
 }
@@ -64,7 +72,7 @@ extension ChatViewController {
 extension ChatViewController {
     func setupOneToOneChat() -> String? {
         guard let senderId = Auth.auth().currentUser?.uid, let receiverId = receiver?.uid else { return nil }
-        return (senderId < receiverId) ? senderId + receiverId : receiverId + senderId
+        return (senderId < receiverId) ? senderId + "-" + receiverId : receiverId + "-" + senderId
     }
 
     @objc func handleSend() {
@@ -84,7 +92,7 @@ extension ChatViewController {
         }
         let thread = Database.database().reference().child("threads").child(threadId)
         let newMessage = thread.childByAutoId()
-        let timestamp = Date().description
+        let timestamp = Date().timeIntervalSince1970.description
         let values = ["text": text, "toId": receiverID, "fromId": senderId, "timestamp": timestamp]
         newMessage.updateChildValues(values)
     }

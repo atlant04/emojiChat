@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import FirebaseAuth
 
 class Bubble: UITableViewCell {
 
@@ -25,17 +26,25 @@ class Bubble: UITableViewCell {
         didSet {
             label.text = message.text
             isSender = message.isSender
+            if message.fromId == Auth.auth().currentUser?.uid {
+                isSender = true
+            } else {
+                isSender = false
+            }
         }
     }
 
-    var isSender: Bool! {
+    var isSender: Bool? {
         didSet {
+            guard let isSender = isSender else { return }
             if isSender {
                 rightConstraint.isActive = true
+                leftConstraint.isActive = false
                 bgView.backgroundColor = .blue
                 label.textColor = .white
             } else {
                 leftConstraint.isActive = true
+                rightConstraint.isActive = false
                 bgView.backgroundColor = .white
                 label.textColor = .black
             }
