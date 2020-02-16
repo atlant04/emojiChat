@@ -77,8 +77,10 @@ extension ChatViewController {
         if messages.count == 0 {
             var ref = Database.database().reference().child("users").child(senderId).child("chats").childByAutoId()
             ref.setValue(threadId)
-            ref = Database.database().reference().child("users").child(receiverID).child("chats").childByAutoId()
-            ref.setValue(threadId)
+            if (receiverID != senderId) {
+                ref = Database.database().reference().child("users").child(receiverID).child("chats").childByAutoId()
+                ref.setValue(threadId)
+            }
         }
         let thread = Database.database().reference().child("threads").child(threadId)
         let newMessage = thread.childByAutoId()

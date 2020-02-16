@@ -44,7 +44,6 @@ struct User: Codable {
             user = try? PropertyListDecoder().decode(User.self, from: data)
             return user
         } else {
-            fatalError("could not retrieve user from user defaults")
             return nil
         }
     }

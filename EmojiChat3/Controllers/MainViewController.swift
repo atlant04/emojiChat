@@ -29,7 +29,13 @@ class MainViewController: UITableViewController {
         if (currentUser == nil) {
              currentUser = User.get()
         }
-        fetchChats()
+        if currentUser == nil {
+            let loginVC = LoginViewController()
+            loginVC.modalPresentationStyle = .fullScreen
+            self.present(loginVC, animated: true, completion: nil)
+        } else {
+             fetchChats()
+        }
     }
 }
 
